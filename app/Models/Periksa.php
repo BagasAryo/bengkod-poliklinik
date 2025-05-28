@@ -2,12 +2,17 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Periksa extends Model
 {
+    use HasFactory;
+
+    protected $table = 'periksa';
+    
     protected $fillable = [
         'id_daftar_poli',
         'tgl_periksa',

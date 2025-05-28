@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama', 255);
             $table->string('alamat', 255);
-            $table->string('no_hp', 15);
+            $table->string('no_hp', 25);
             $table->foreignId('id_poli')->constrained('poli')->onDelete('cascade');
             $table->timestamps();
         });
