@@ -29,7 +29,16 @@ class ObatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_obat' => 'required|string|max:255',
+            'kemasan' => 'required|string|max:50',
+            'harga' => 'required|numeric|min:0',
+        ]);
+
+        Obat::create($request->all());
+
+        return redirect()->route('pages.admin.obat.index')
+            ->with('success', 'Obat created successfully.');
     }
 
     /**
@@ -45,7 +54,9 @@ class ObatController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $obat = Obat::findOrFail($id);
+        $obats = Obat::all();
+        return view('pages.admin.obat-edit', compact('obat', 'obats'));
     }
 
     /**
@@ -53,7 +64,17 @@ class ObatController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nama_obat' => 'required|string|max:255',
+            'kemasan' => 'required|string|max:50',
+            'harga' => 'required|numeric|min:0',
+        ]);
+
+        $obat = Obat::findOrFail($id);
+        $obat->update($request->all());
+
+        return redirect()->route('pages.admin.obat.index')
+            ->with('success', 'Obat updated successfully.');
     }
 
     /**
@@ -61,6 +82,10 @@ class ObatController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $obat = Obat::findOrFail($id);
+        $obat->delete();
+
+        return redirect()->route('pages.admin.obat.index')
+            ->with('success', 'Obat deleted successfully.');
     }
 }

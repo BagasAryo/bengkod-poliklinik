@@ -1,16 +1,17 @@
 @extends('layouts.app')
 
-@section('title', 'Admin - Obat')
+@section('title', 'Admin - Edit Obat')
 
 @section('content-header')
   <div class="row">
     <div class="col-sm-6">
-      <h3 class="mb-0">Obat Settings</h3>
+      <h3 class="mb-0">Pasien Settings</h3>
     </div>
     <div class="col-sm-6">
       <ol class="breadcrumb float-sm-end">
         <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Obat</li>
+        <li class="breadcrumb-item">Edit</li>
+        <li class="breadcrumb-item active" aria-current="page">Edit Obat</li>
       </ol>
     </div>
   </div>
@@ -55,30 +56,31 @@
       <div class="col-12">
         <div class="card shadow-lg">
           <div class="card-header">
-            <h3 class="card-title">Tambah Obat</h3>
+            <h3 class="card-title">Edit Obat</h3>
           </div>
-          <form action="{{ route('pages.admin.obat.store') }}" method="POST">
+          <form action="{{ route('pages.admin.obat.update', $obat->id) }}" method="POST">
             @csrf
+            @method('PUT')
             <div class="card-body">
               <div class="form-group">
                 <label for="nama_obat">Nama Obat</label>
                 <input type="text" class="form-control" id="nama_obat" name="nama_obat"
-                  placeholder="Input the Pill's name" required>
+                  value="{{ $obat->nama_obat }}" required>
               </div>
               <div class="form-group">
                 <label for="kemasan">Kemasan</label>
-                <input type="text" class="form-control" id="kemasan" name="kemasan" placeholder="Input the Packaging name"
+                <input type="text" class="form-control" id="kemasan" name="kemasan" value="{{ $obat->kemasan }}"
                   required>
               </div>
               <div class="form-group">
                 <label for="harga">Harga</label>
                 <input type="number" class="form-control" id="harga" name="harga"
-                  placeholder="Input the Price" required>
+                  value="{{ $obat->harga }}" required>
               </div>
             </div>
             <div class="card-footer">
               <button type="submit" class="btn btn-success">Submit</button>
-              <button type="reset" class="btn btn-secondary">Reset</button>
+              <a href="{{ route('pages.admin.obat.index') }}" class="btn btn-secondary">Cancel</a>
             </div>
           </form>
         </div>
