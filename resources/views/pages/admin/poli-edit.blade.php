@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Admin - Poli')
+@section('title', 'Admin - Edit Poli')
 
 @section('content-header')
   <div class="row">
@@ -54,24 +54,25 @@
         <div class="col-12">
           <div class="card shadow-lg">
             <div class="card-header">
-              <h3 class="card-title">Tambah Poli</h3>
+              <h3 class="card-title">Edit Poli</h3>
             </div>
-            <form action="{{ route('pages.admin.poli.store') }}" method="POST">
+            <form action="{{ route('pages.admin.poli.update', $poli->id) }}" method="POST">
               @csrf
+              @method('PUT')
               <div class="card-body">
                 <div class="form-group">
                   <label for="nama_poli">Nama Poli</label>
-                  <input type="text" class="form-control" id="nama_poli" name="nama_poli" placeholder="Input Poli's name"
+                  <input type="text" class="form-control" id="nama_poli" name="nama_poli" value="{{ $poli->nama_poli }}" placeholder="Input Poli's name"
                     required>
                 </div>
                 <div class="form-group">
                   <label for="keterangan">Keterangan</label>
                   <textarea class="form-control" id="keterangan" name="keterangan" placeholder="Input Poli's description" rows="3"
-                    required></textarea>
+                    required>{{ $poli->keterangan }}</textarea>
                 </div>
                 <div class="card-footer">
                   <button type="submit" class="btn btn-success">Submit</button>
-                  <button type="reset" class="btn btn-secondary">Reset</button>
+                  <a href="{{ route('pages.admin.poli.index') }}" class="btn btn-secondary">Cancel</a>
                 </div>
             </form>
           </div>
@@ -97,7 +98,7 @@
                     <td>{{ $poli->nama_poli }}</td>
                     <td>{{ $poli->keterangan }}</td>
                     <td>
-                      <a href="{{ route('pages.admin.poli.edit', $poli->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                      <a href="/pages/admin/poli/{{ $poli->id }}/edit" class="btn btn-warning btn-sm">Edit</a>
                       <form action="{{ route('pages.admin.poli.destroy', $poli->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
