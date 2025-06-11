@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
-@section('title', 'Admin - Edit Pasien')
+@section('title', 'Admin - Dokter')
 
 @section('content-header')
   <div class="row">
     <div class="col-sm-6">
-      <h3 class="mb-0">Pasien Settings</h3>
+      <h3 class="mb-0">Dokter Settings</h3>
     </div>
     <div class="col-sm-6">
       <ol class="breadcrumb float-sm-end">
         <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Pasien</li>
+        <li class="breadcrumb-item active" aria-current="page">Dokter</li>
       </ol>
     </div>
   </div>
@@ -24,13 +24,13 @@
     </a>
   </li>
   <li class="nav-item">
-    <a href="/pages/admin/dokter" class="nav-link">
+    <a href="/pages/admin/dokter" class="nav-link active">
       <i class="nav-icon fas fa-user-doctor fa-lg"></i>
       <p>Dokter</p>
     </a>
   </li>
   <li class="nav-item">
-    <a href="/pages/admin/pasien" class="nav-link active">
+    <a href="/pages/admin/pasien" class="nav-link">
       <i class="nav-icon fas fa-user-injured fa-lg"></i>
       <p>Pasien</p>
     </a>
@@ -64,36 +64,37 @@
             </div>
           @endif
           <div class="card-header">
-            <h3 class="card-title">Edit Pasien</h3>
+            <h3 class="card-title">Edit Dokter</h3>
           </div>
-          <form action="{{ route('pages.admin.pasien.update', $pasien->id) }}" method="POST">
+          <form action="{{ route('pages.admin.dokter.update', $dokter->id) }}" method="POST">
             @csrf
             @method('PUT')
             <div class="card-body">
               <div class="form-group">
-                <label for="nama">Nama Pasien</label>
-                <input type="text" class="form-control" id="nama" name="nama"
-                  value="{{ $pasien->nama }}" required>
+                <label for="nama">Nama Dokter</label>
+                <input type="text" class="form-control" id="nama" name="nama" value="{{ $dokter->nama }}"
+                  placeholder="Input Doctor's name" required>
               </div>
               <div class="form-group">
                 <label for="alamat">Alamat</label>
-                <input type="text" class="form-control" id="alamat" name="alamat" value="{{ $pasien->alamat }}"
-                  required>
+                <input type="text" class="form-control" id="alamat" name="alamat" value="{{ $dokter->alamat }}"
+                  placeholder="Input the address" required>
               </div>
               <div class="form-group">
-                <label for="no_ktp">No. KTP</label>
-                <input type="text" class="form-control" id="no_ktp" name="no_ktp"
-                  value="{{ $pasien->no_ktp }}" required>
+                <label for="no_hp">No Hp</label>
+                <input type="text" class="form-control" id="no_hp" name="no_hp" value="{{ $dokter->no_hp }}"
+                  placeholder="Input the phone number" required>
               </div>
               <div class="form-group">
-                <label for="no_hp">No. Hp</label>
-                <input type="text" class="form-control" id="no_hp" name="no_hp"
-                  value="{{ $pasien->no_hp }}" required>
-              </div>
-              <div class="form-group">
-                <label for="no_rm">No. RM</label>
-                <input type="text" class="form-control" id="no_rm" name="no_rm" value="{{ $pasien->no_rm }}"
-                  required>
+                <label for="id_poli">Poli</label>
+                <select class="form-select" id="id_poli" name="id_poli" required>
+                  <option value="" disabled selected>Pilih Poli</option>
+                  @foreach ($polis as $poli)
+                    <option value="{{ $poli->id }}" {{ $dokter->id_poli == $poli->id ? 'selected' : '' }}>
+                      {{ $poli->nama_poli }}
+                    </option>
+                  @endforeach
+                </select>
               </div>
             </div>
             <div class="card-footer">
@@ -105,33 +106,31 @@
       </div>
       <div class="card shadow-lg mt-3">
         <div class="card-header">
-          <h3 class="card-title">Daftar Pasien</h3>
+          <h3 class="card-title">Daftar Dokter</h3>
         </div>
         <div class="card-body table-responsive">
           <table class="table table-bordered table-striped text-center">
             <thead>
               <tr>
                 <th>No</th>
-                <th>Nama Pasien</th>
+                <th>Nama Dokter</th>
                 <th>Alamat</th>
-                <th>No KTP</th>
                 <th>No Hp</th>
-                <th>No RM</th>
+                <th>Poli</th>
                 <th>Aksi</th>
               </tr>
             </thead>
             <tbody>
-              @foreach ($pasiens as $pasien)
+              @foreach ($dokters as $dokter)
                 <tr class="align-middle">
                   <td>{{ $loop->iteration }}</td>
-                  <td>{{ $pasien->nama }}</td>
-                  <td>{{ $pasien->alamat }}</td>
-                  <td>{{ $pasien->no_ktp }}</td>
-                  <td>{{ $pasien->no_hp }}</td>
-                  <td>{{ $pasien->no_rm }}</td>
+                  <td>{{ $dokter->nama }}</td>
+                  <td>{{ $dokter->alamat }}</td>
+                  <td>{{ $dokter->no_hp }}</td>
+                  <td>{{ $dokter->poli->nama_poli }}</td>
                   <td>
-                    <a href="{{ route('pages.admin.pasien.edit', $pasien->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <form action="{{ route('pages.admin.pasien.destroy', $pasien->id) }}" method="POST"
+                    <a href="{{ route('pages.admin.dokter.edit', $dokter->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <form action="{{ route('pages.admin.dokter.destroy', $dokter->id) }}" method="POST"
                       style="display: inline;">
                       @csrf
                       @method('DELETE')
@@ -145,4 +144,5 @@
         </div>
       </div>
     </div>
-  @endsection
+  </div>
+@endsection

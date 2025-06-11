@@ -54,10 +54,19 @@
     <div class="row">
       <div class="col-12">
         <div class="card shadow-lg">
+          @if ($errors->any())
+            <div class="alert alert-danger">
+              <ul>
+                @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                @endforeach
+              </ul>
+            </div>
+          @endif
           <div class="card-header">
             <h3 class="card-title">Tambah Dokter</h3>
           </div>
-          <form action="" method="POST">
+          <form action="{{ route('pages.admin.dokter.store') }}" method="POST">
             @csrf
             <div class="card-body">
               <div class="form-group">
@@ -72,12 +81,12 @@
               </div>
               <div class="form-group">
                 <label for="no_hp">No Hp</label>
-                <input type="number" class="form-control" id="no_hp" name="no_hp"
+                <input type="text" class="form-control" id="no_hp" name="no_hp"
                   placeholder="Input the phone number" required>
               </div>
               <div class="form-group">
-                <label for="poli">Poli</label>
-                <select class="form-select" id="poli" name="poli" required>
+                <label for="id_poli">Poli</label>
+                <select class="form-select" id="id_poli" name="id_poli" required>
                   <option value="" disabled selected>Pilih Poli</option>
                   @forelse ($dokters as $dokter)
                     <option value="{{ $dokter->poli->id }}">{{ $dokter->poli->nama_poli }}</option>
@@ -86,7 +95,7 @@
                 </select>
               </div>
               <div class="card-footer">
-                <button type="submit" class="btn btn-success">Tambah Dokter</button>
+                <button type="submit" class="btn btn-success">Submit</button>
                 <button type="reset" class="btn btn-secondary">Reset</button>
               </div>
           </form>
@@ -117,8 +126,9 @@
                   <td>{{ $dokter->no_hp }}</td>
                   <td>{{ $dokter->poli->nama_poli }}</td>
                   <td>
-                    <a href="" class="btn btn-warning btn-sm">Edit</a>
-                    <form action="" method="POST" style="display: inline;">
+                    <a href="{{ route('pages.admin.dokter.edit', $dokter->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <form action="{{ route('pages.admin.dokter.destroy', $dokter->id) }}" method="POST"
+                      style="display: inline;">
                       @csrf
                       @method('DELETE')
                       <button type="submit" class="btn btn-danger btn-sm">Hapus</button>

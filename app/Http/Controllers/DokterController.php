@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dokter;
+use App\Models\Poli;
 use Illuminate\Http\Request;
 
 class DokterController extends Controller
@@ -29,7 +30,19 @@ class DokterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'alamat' => 'required|string|max:255',
+            'no_hp' => 'required|string|max:25',
+            'id_poli' => 'required|exists:poli,id',
+        ]);
+        Dokter::create([
+            'nama' => $request->nama,
+            'alamat' => $request->alamat,
+            'no_hp' => $request->no_hp,
+            'id_poli' => $request->id_poli,
+        ]);
+        return redirect()->route('pages.admin.dokter.index')->with('success', 'Dokter successfully created.');
     }
 
     /**
@@ -45,7 +58,10 @@ class DokterController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $dokter = Dokter::findOrFail($id);
+        $dokters = Dokter::all();
+        $polis = Poli::all();
+        return view('pages.admin.dokter-edit', compact('dokter', 'polis', 'dokters'));
     }
 
     /**
@@ -53,7 +69,20 @@ class DokterController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'alamat' => 'required|string|max:255',
+            'no_hp' => 'required|string|max:25',
+            'id_poli' => 'required|exists:poli,id',
+        ]);
+        $dokter = Dokter::findOrFail($id);
+        $dokter->update([
+            'nama' => $request->nama,
+            'alamat' => $request->alamat,
+            'no_hp' => $request->no_hp,
+            'id_poli' => $request->id_poli,
+        ]);
+        return redirect()->route('pages.admin.dokter.index')->with('success', 'Dokter successfully updated.');
     }
 
     /**
