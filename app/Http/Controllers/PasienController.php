@@ -29,7 +29,15 @@ class PasienController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required|string|max:255',
+            'alamat' => 'required|string|max:255',
+            'no_ktp' => 'required|string|max:16|unique:pasien,no_ktp',
+            'no_hp' => 'required|string|max:15',
+            'no_rm' => 'required|string|max:25',
+        ]);
+        Pasien::create($validatedData);
+        return redirect()->route('pages.admin.pasien.index')->with('success', 'Pasien successfully created.');
     }
 
     /**
@@ -45,7 +53,9 @@ class PasienController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $pasien = Pasien::findOrFail($id);
+        $pasiens = Pasien::all();
+        return view('pages.admin.pasien-edit', compact('pasien', 'pasiens'));
     }
 
     /**
@@ -53,7 +63,16 @@ class PasienController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'alamat' => 'required|string|max:255',
+            'no_ktp' => 'required|string|max:16|unique:pasien,no_ktp,',
+            'no_hp' => 'required|string|max:15',
+            'no_rm' => 'required|string|max:25',
+        ]);
+        $pasien = Pasien::findOrFail($id);
+        $pasien->update($request->all());
+        return redirect()->route('pages.admin.pasien.index')->with('success', 'Pasien successfully updated.');
     }
 
     /**
@@ -61,6 +80,8 @@ class PasienController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $obat = Pasien::findOrFail($id);
+        $obat->delete();
+        return redirect()->route('pages.admin.pasien.index')->with('success', 'Pasien successfully deleted.');
     }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Admin - Pasien')
+@section('title', 'Admin - Edit Pasien')
 
 @section('content-header')
   <div class="row">
@@ -64,34 +64,35 @@
             </div>
           @endif
           <div class="card-header">
-            <h3 class="card-title">Tambah Pasien</h3>
+            <h3 class="card-title">Edit Pasien</h3>
           </div>
-          <form action="{{ route('pages.admin.pasien.store') }}" method="POST">
+          <form action="{{ route('pages.admin.pasien.update', $pasien->id) }}" method="POST">
             @csrf
+            @method('PUT')
             <div class="card-body">
               <div class="form-group">
                 <label for="nama">Nama Pasien</label>
                 <input type="text" class="form-control" id="nama" name="nama"
-                  placeholder="Input Patient's name" required>
+                  value="{{ $pasien->nama }}" required>
               </div>
               <div class="form-group">
                 <label for="alamat">Alamat</label>
-                <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Input the address"
+                <input type="text" class="form-control" id="alamat" name="alamat" value="{{ $pasien->alamat }}"
                   required>
               </div>
               <div class="form-group">
                 <label for="no_ktp">No. KTP</label>
                 <input type="text" class="form-control" id="no_ktp" name="no_ktp"
-                  placeholder="Input the KTP number" required>
+                  value="{{ $pasien->no_ktp }}" required>
               </div>
               <div class="form-group">
                 <label for="no_hp">No. Hp</label>
                 <input type="text" class="form-control" id="no_hp" name="no_hp"
-                  placeholder="Input the phone number" required>
+                  value="{{ $pasien->no_hp }}" required>
               </div>
               <div class="form-group  ">
                 <label for="no_rm">No. RM</label>
-                <input type="text" class="form-control" id="no_rm" name="no_rm" placeholder="Input the RM number"
+                <input type="text" class="form-control" id="no_rm" name="no_rm" value="{{ $pasien->no_rm }}"
                   required>
               </div>
             </div>

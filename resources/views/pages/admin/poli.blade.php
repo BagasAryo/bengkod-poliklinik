@@ -69,6 +69,7 @@
                   <textarea class="form-control" id="keterangan" name="keterangan" placeholder="Input Poli's description" rows="3"
                     required></textarea>
                 </div>
+              </div>
                 <div class="card-footer">
                   <button type="submit" class="btn btn-success">Submit</button>
                   <button type="reset" class="btn btn-secondary">Reset</button>
