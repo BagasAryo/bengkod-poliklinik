@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Admin - Pasien')
+@section('title', 'Admin - Obat')
 
 @section('content-header')
   <div class="row">
@@ -30,7 +30,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a href="/pages/admin/pasien" class="nav-link active">
+    <a href="/pages/admin/pasien" class="nav-link">
       <i class="nav-icon fas fa-user-injured fa-lg"></i>
       <p>Pasien</p>
     </a>
@@ -42,7 +42,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a href="/pages/admin/obat" class="nav-link">
+    <a href="/pages/admin/obat" class="nav-link active">
       <i class="nav-icon fas fa-capsules fa-lg"></i>
       <p>Obat</p>
     </a>
@@ -55,35 +55,25 @@
       <div class="col-12">
         <div class="card shadow-lg">
           <div class="card-header">
-            <h3 class="card-title">Tambah Pasien</h3>
+            <h3 class="card-title">Tambah Obat</h3>
           </div>
           <form action="" method="POST">
             @csrf
             <div class="card-body">
               <div class="form-group">
-                <label for="nama">Nama Pasien</label>
+                <label for="nama">Nama Obat</label>
                 <input type="text" class="form-control" id="nama" name="nama"
                   placeholder="Input Patient's name" required>
               </div>
               <div class="form-group">
-                <label for="alamat">Alamat</label>
+                <label for="alamat">Kemasan</label>
                 <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Input the address"
                   required>
               </div>
               <div class="form-group">
-                <label for="no_ktp">No. KTP</label>
+                <label for="no_ktp">Harga</label>
                 <input type="text" class="form-control" id="no_ktp" name="no_ktp"
                   placeholder="Input the KTP number" required>
-              </div>
-              <div class="form-group">
-                <label for="no_ktp">No. Hp</label>
-                <input type="text" class="form-control" id="no_hp" name="no_hp"
-                  placeholder="Input the phone number" required>
-              </div>
-              <div class="form-group  ">
-                <label for="no_rm">No. RM</label>
-                <input type="text" class="form-control" id="no_rm" name="no_rm" placeholder="Input the RM number"
-                  required>
               </div>
             </div>
             <div class="card-footer">
@@ -104,21 +94,17 @@
                 <th>No</th>
                 <th>Nama Pasien</th>
                 <th>Alamat</th>
-                <th>No KTP</th>
-                <th>No Hp</th>
-                <th>No RM</th>
+                <th>Harga</th>
                 <th>Aksi</th>
               </tr>
             </thead>
             <tbody>
-              @foreach ($pasiens as $pasien)
+              @foreach ($obats as $obat)
                 <tr class="align-middle">
                   <td>{{ $loop->iteration }}</td>
-                  <td>{{ $pasien->nama }}</td>
-                  <td>{{ $pasien->alamat }}</td>
-                  <td>{{ $pasien->no_ktp }}</td>
-                  <td>{{ $pasien->no_hp }}</td>
-                  <td>{{ $pasien->no_rm }}</td>
+                  <td>{{ $obat->nama_obat }}</td>
+                  <td>{{ $obat->kemasan }}</td>
+                  <td>{{ $obat->harga }}</td>
                   <td>
                     <a href="" class="btn btn-warning btn-sm">Edit</a>
                     <form action="" method="POST" style="display: inline;">

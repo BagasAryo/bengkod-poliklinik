@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Admin Dashboard')
+@section('title', 'Admin - Dashboard')
 
 @section('content-header')
   <div class="row">
@@ -35,6 +35,18 @@
     <a href="/pages/admin/pasien" class="nav-link">
       <i class="nav-icon fas fa-user-injured fa-lg"></i>
       <p>Pasien</p>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a href="/pages/admin/poli" class="nav-link">
+      <i class="nav-icon fas fa-house-chimney-medical fa-lg"></i>
+      <p>Poli</p>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a href="/pages/admin/obat" class="nav-link">
+      <i class="nav-icon fas fa-capsules fa-lg"></i>
+      <p>Obat</p>
     </a>
   </li>
 @endsection

@@ -35,6 +35,18 @@
       <p>Pasien</p>
     </a>
   </li>
+  <li class="nav-item">
+    <a href="/pages/admin/poli" class="nav-link">
+      <i class="nav-icon fas fa-house-chimney-medical fa-lg"></i>
+      <p>Poli</p>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a href="/pages/admin/obat" class="nav-link">
+      <i class="nav-icon fas fa-capsules fa-lg"></i>
+      <p>Obat</p>
+    </a>
+  </li>
 @endsection
 
 @section('content')
@@ -75,6 +87,7 @@
               </div>
               <div class="card-footer">
                 <button type="submit" class="btn btn-success">Tambah Dokter</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
               </div>
           </form>
         </div>
