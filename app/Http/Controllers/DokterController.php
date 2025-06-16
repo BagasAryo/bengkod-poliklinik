@@ -61,7 +61,7 @@ class DokterController extends Controller
         $dokter = Dokter::findOrFail($id);
         $dokters = Dokter::all();
         $polis = Poli::all();
-        return view('pages.admin.dokter-edit', compact('dokter', 'polis', 'dokters'));
+        return view('pages.admin.dokter_edit', compact('dokter', 'polis', 'dokters'));
     }
 
     /**

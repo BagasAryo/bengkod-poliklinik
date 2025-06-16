@@ -22,3 +22,7 @@ Route::resource('/pages/admin/poli', PoliController::class)
     ->names('pages.admin.poli');
 Route::resource('pages/admin/obat', ObatController::class)
     ->names('pages.admin.obat');
+
+Route::get('/pages/dokter/dashboard', function () {
+    return view('pages.dokter.dashboard');
+})->name('pages.dokter.dashboard');

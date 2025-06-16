@@ -56,7 +56,7 @@ class ObatController extends Controller
     {
         $obat = Obat::findOrFail($id);
         $obats = Obat::all();
-        return view('pages.admin.obat-edit', compact('obat', 'obats'));
+        return view('pages.admin.obat_edit', compact('obat', 'obats'));
     }
 
     /**

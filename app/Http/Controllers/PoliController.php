@@ -57,7 +57,7 @@ class PoliController extends Controller
     {
         $polis = Poli::all();
         $poli = Poli::findOrFail($id);
-        return view('pages.admin.poli-edit', compact('poli', 'polis'));
+        return view('pages.admin.poli_edit', compact('poli', 'polis'));
     }
 
     /**

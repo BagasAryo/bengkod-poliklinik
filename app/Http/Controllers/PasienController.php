@@ -55,7 +55,7 @@ class PasienController extends Controller
     {
         $pasien = Pasien::findOrFail($id);
         $pasiens = Pasien::all();
-        return view('pages.admin.pasien-edit', compact('pasien', 'pasiens'));
+        return view('pages.admin.pasien_edit', compact('pasien', 'pasiens'));
     }
 
     /**
