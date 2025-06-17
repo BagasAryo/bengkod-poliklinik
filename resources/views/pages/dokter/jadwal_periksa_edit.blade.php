@@ -10,7 +10,8 @@
     <div class="col-sm-6">
       <ol class="breadcrumb float-sm-end">
         <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Jadwal Periksa</li>
+        <li class="breadcrumb-item"><a href="{{ route('pages.dokter.jadwal_periksa.index') }}">Jadwal Periksa</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Edit</li>
       </ol>
     </div>
   </div>
@@ -68,15 +69,16 @@
           <div class="card-header">
             <h3 class="card-title">Tambah Jadwal Periksa</h3>
           </div>
-          <form action="{{ route('pages.dokter.jadwal_periksa.store') }}" method="POST">
+          <form action="{{ route('pages.dokter.jadwal_periksa.update', $jadwalPeriksa->id) }}" method="POST">
             @csrf
+            @method('PUT')
             <div class="card-body">
               <div class="form-group">
                 <label for="id_dokter">Nama Dokter</label>
                 <select class="form-select" id="id_dokter" name="id_dokter" required>
                   <option value="" disabled selected>Pilih Dokter</option>
                   @foreach ($dokters as $dokter)
-                    <option value="{{ $dokter->id }}">{{ $dokter->nama }}</option>
+                    <option value="{{ $dokter->id }}" {{ $jadwalPeriksa->id_dokter == $dokter->id ? 'selected' : '' }}>{{ $dokter->nama }}</option>
                   @endforeach
                 </select>
               </div>
@@ -85,22 +87,22 @@
                 <select class="form-select" id="hari" name="hari" required>
                   <option value="" disabled selected>Pilih Hari</option>
                   @foreach ($days as $day)
-                    <option value="{{ $day }}">{{ ucfirst($day) }}</option>
+                    <option value="{{ $day }}" {{ $jadwalPeriksa->hari == $day ? 'selected' : '' }}>{{ ucfirst($day) }}</option>
                   @endforeach
                 </select>
               </div>
               <div class="form-group">
                 <label for="jam_mulai">Jam Mulai</label>
-                <input type="time" class="form-control" id="jam_mulai" name="jam_mulai" required>
+                <input type="time" class="form-control" id="jam_mulai" name="jam_mulai" value="{{ $jadwalPeriksa->jam_mulai }}" required>
               </div>
               <div class="form-group">
                 <label for="jam_selesai">Jam Selesai</label>
-                <input type="time" class="form-control" id="jam_selesai" name="jam_selesai" required>
+                <input type="time" class="form-control" id="jam_selesai" name="jam_selesai" value="{{ $jadwalPeriksa->jam_selesai }}" required>
               </div>
             </div>
             <div class="card-footer">
-              <button type="submit" class="btn btn-success">Tambah Jadwal</button>
-              <button type="reset" class="btn btn-secondary">Reset</button>
+              <button type="submit" class="btn btn-success">Edit Jadwal</button>
+              <a href="{{ route('pages.dokter.jadwal_periksa.index') }}" class="btn btn-secondary">Cancel</a>
             </div>
           </form>
         </div>

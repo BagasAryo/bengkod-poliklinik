@@ -26,7 +26,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a href="/pages/admin/dokter" class="nav-link">
+    <a href="/pages/dokter/jadwal-periksa" class="nav-link">
       <i class="nav-icon fas fa-rectangle-list fa-lg"></i>
       <p>Jadwal Periksa</p>
     </a>

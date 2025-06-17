@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DokterController;
+use App\Http\Controllers\JadwalPeriksaController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PoliController;
@@ -26,3 +27,6 @@ Route::resource('pages/admin/obat', ObatController::class)
 Route::get('/pages/dokter/dashboard', function () {
     return view('pages.dokter.dashboard');
 })->name('pages.dokter.dashboard');
+
+Route::resource('/pages/dokter/jadwal-periksa', JadwalPeriksaController::class)
+    ->names('pages.dokter.jadwal_periksa');
