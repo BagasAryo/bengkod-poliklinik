@@ -36,3 +36,6 @@ Route::resource('/pages/dokter/periksa-pasien', periksaPasienController::class)
     ->names('pages.dokter.periksa_pasien');
 Route::resource('/pages/dokter/riwayat-pasien', riwayatController::class)
     ->names('pages.dokter.riwayat_pasien');
+Route::get('/pages/dokter/profil', function () {
+    return view('pages.dokter.profil');
+})->name('pages.dokter.profil');
