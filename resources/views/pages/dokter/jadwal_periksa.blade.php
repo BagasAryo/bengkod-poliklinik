@@ -32,19 +32,19 @@
     </a>
   </li>
   <li class="nav-item">
-    <a href="/pages/admin/pasien" class="nav-link">
+    <a href="/pages/dokter/periksa-pasien" class="nav-link">
       <i class="nav-icon fas fa-clipboard-user fa-lg"></i>
       <p>Memeriksa Pasien</p>
     </a>
   </li>
   <li class="nav-item">
-    <a href="/pages/admin/poli" class="nav-link">
+    <a href="/pages/dokter/riwayat-pasien" class="nav-link">
       <i class="nav-icon fas fa-book-medical fa-lg"></i>
       <p>Riwayat Pasien</p>
     </a>
   </li>
   <li class="nav-item">
-    <a href="/pages/admin/obat" class="nav-link">
+    <a href="/pages/dokter/profil" class="nav-link">
       <i class="nav-icon fas fa-id-card fa-lg"></i>
       <p>Profil</p>
     </a>

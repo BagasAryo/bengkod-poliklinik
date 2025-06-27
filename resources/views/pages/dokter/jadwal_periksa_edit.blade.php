@@ -33,7 +33,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a href="/pages/admin/pasien" class="nav-link">
+    <a href="/pages/dokter/periksa-pasien" class="nav-link">
       <i class="nav-icon fas fa-clipboard-user fa-lg"></i>
       <p>Memeriksa Pasien</p>
     </a>
@@ -78,7 +78,8 @@
                 <select class="form-select" id="id_dokter" name="id_dokter" required>
                   <option value="" disabled selected>Pilih Dokter</option>
                   @foreach ($dokters as $dokter)
-                    <option value="{{ $dokter->id }}" {{ $jadwalPeriksa->id_dokter == $dokter->id ? 'selected' : '' }}>{{ $dokter->nama }}</option>
+                    <option value="{{ $dokter->id }}" {{ $jadwalPeriksa->id_dokter == $dokter->id ? 'selected' : '' }}>
+                      {{ $dokter->nama }}</option>
                   @endforeach
                 </select>
               </div>
@@ -87,17 +88,20 @@
                 <select class="form-select" id="hari" name="hari" required>
                   <option value="" disabled selected>Pilih Hari</option>
                   @foreach ($days as $day)
-                    <option value="{{ $day }}" {{ $jadwalPeriksa->hari == $day ? 'selected' : '' }}>{{ ucfirst($day) }}</option>
+                    <option value="{{ $day }}" {{ $jadwalPeriksa->hari == $day ? 'selected' : '' }}>
+                      {{ ucfirst($day) }}</option>
                   @endforeach
                 </select>
               </div>
               <div class="form-group">
                 <label for="jam_mulai">Jam Mulai</label>
-                <input type="time" class="form-control" id="jam_mulai" name="jam_mulai" value="{{ $jadwalPeriksa->jam_mulai }}" required>
+                <input type="time" class="form-control" id="jam_mulai" name="jam_mulai"
+                  value="{{ $jadwalPeriksa->jam_mulai }}" required>
               </div>
               <div class="form-group">
                 <label for="jam_selesai">Jam Selesai</label>
-                <input type="time" class="form-control" id="jam_selesai" name="jam_selesai" value="{{ $jadwalPeriksa->jam_selesai }}" required>
+                <input type="time" class="form-control" id="jam_selesai" name="jam_selesai"
+                  value="{{ $jadwalPeriksa->jam_selesai }}" required>
               </div>
             </div>
             <div class="card-footer">

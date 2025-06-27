@@ -38,6 +38,10 @@
   <!-- jsvectormap -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css"
     integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4=" crossorigin="anonymous" />
+  <!-- Select2 style cdn -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <!--end::Head-->
@@ -100,7 +104,7 @@
           <!--begin::Row-->
           @yield('content')
           <!--end::Row-->
-          
+
         </div>
         <!--end::Container-->
       </div>
@@ -113,6 +117,9 @@
   </div>
   <!--end::App Wrapper-->
   <!--begin::Script-->
+  <!-- select2 script -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <!--begin::Third Party Plugin(OverlayScrollbars)-->
   <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/browser/overlayscrollbars.browser.es6.min.js"
     integrity="sha256-dghWARbRe2eLlIJ56wNB+b760ywulqK3DzZYEpsg2fQ=" crossorigin="anonymous"></script>
@@ -126,6 +133,11 @@
   <script src="{{ asset('dist/js/adminlte.js') }}"></script>
   <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
   <script>
+    $(document).ready(function() {
+      $('.select2').select2({
+        placeholder: "Pilih Obat"
+      });
+    });
     const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
     const Default = {
       scrollbarTheme: 'os-theme-light',

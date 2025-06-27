@@ -27,6 +27,6 @@ class Periksa extends Model
 
     public function detailPeriksa(): HasMany
     {
-        return $this->hasMany(Dokter::class, 'id_dokter');
+        return $this->hasMany(DetailPeriksa::class, 'id_periksa');
     }
 }
