@@ -6,6 +6,7 @@ use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\periksaPasienController;
 use App\Http\Controllers\PoliController;
+use App\Http\Controllers\riwayatController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -33,3 +34,5 @@ Route::resource('/pages/dokter/jadwal-periksa', JadwalPeriksaController::class)
     ->names('pages.dokter.jadwal_periksa');
 Route::resource('/pages/dokter/periksa-pasien', periksaPasienController::class)
     ->names('pages.dokter.periksa_pasien');
+Route::resource('/pages/dokter/riwayat-pasien', riwayatController::class)
+    ->names('pages.dokter.riwayat_pasien');
