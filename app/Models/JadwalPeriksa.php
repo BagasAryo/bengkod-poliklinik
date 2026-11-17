@@ -4,29 +4,42 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class JadwalPeriksa extends Model
 {
     use HasFactory;
 
     protected $table = 'jadwal_periksa';
-    
+
     protected $fillable = [
-        'id_dokter',
+        'dokter_id',
         'hari',
         'jam_mulai',
         'jam_selesai',
+        'status'
     ];
 
-    public function dokter(): BelongsTo
+    /**
+     * Relasi ke model Dokter
+     */
+    public function dokter()
     {
-        return $this->belongsTo(Dokter::class, 'id_dokter');
+        return $this->belongsTo(Dokter::class, 'dokter_id');
     }
 
-    public function daftarPoli(): HasMany
+    /**
+     * Relasi ke daftar_poli (banyak)
+     */
+    public function daftarPoli()
     {
-        return $this->hasMany(DaftarPoli::class, 'id_jadwal');
+        return $this->hasMany(DaftarPoli::class, 'jadwal_id');
+    }
+
+    /**
+     * Accessor untuk nama dokter (optional, untuk kemudahan tampilan)
+     */
+    public function getNamaDokterAttribute()
+    {
+        return $this->dokter?->user?->name ?? '-';
     }
 }

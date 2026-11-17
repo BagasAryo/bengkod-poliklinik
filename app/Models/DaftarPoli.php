@@ -4,34 +4,48 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class DaftarPoli extends Model
 {
     use HasFactory;
 
-    protected $table = 'daftar_poli';
-    
+    protected $table = 'daftar_polis';
+
     protected $fillable = [
-        'id_pasien',
-        'id_jadwal',
+        'pasien_id',
+        'poli_id',
+        'jadwal_id',
         'keluhan',
         'no_antrian',
+        'status'
     ];
 
-    public function jadwalPeriksa(): BelongsTo
+    public function pasien()
     {
-        return $this->belongsTo(JadwalPeriksa::class, 'id_jadwal');
+        return $this->belongsTo(Pasien::class, 'pasien_id');
     }
 
-    public function pasien(): belongsTo
+    public function poli()
     {
-        return $this->belongsTo(Pasien::class, 'id_pasien');
+        return $this->belongsTo(Poli::class);
+    }
+    public function jadwal()
+    {
+        return $this->belongsTo(JadwalPeriksa::class, 'jadwal_id');
     }
 
-    public function periksa(): HasMany
+    public function periksa()
     {
-        return $this->hasMany(Periksa::class, 'id_periksa');
+        return $this->hasOne(Periksa::class, 'daftar_poli_id');
+    }
+
+    public static function generateNoAntrian($poli_id, $tanggal)
+    {
+        $lastAntrian = self::where('poli_id', $poli_id)
+            ->whereDate('tanggal_daftar', $tanggal)
+            ->orderBy('no_antrian', 'desc')
+            ->first();
+
+        return $lastAntrian ? $lastAntrian->no_antrian + 1 : 1;
     }
 }

@@ -4,29 +4,52 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Dokter extends Model
 {
     use HasFactory;
 
-    protected $table = 'dokter';
+    protected $table = 'dokters';
 
     protected $fillable = [
         'nama',
         'alamat',
+        'nama_poli',
+        'email',
         'no_hp',
-        'id_poli',
+        'poli_id',
+        'user_id',
     ];
 
-    public function poli(): BelongsTo
+    /**
+     * Relasi ke User (dokter adalah user)
+     */
+    public function user()
     {
-        return $this->belongsTo(Poli::class, 'id_poli');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function jadwalPeriksa(): HasMany
+    /**
+     * Relasi ke Poli
+     */
+    public function poli()
     {
-        return $this->hasMany(JadwalPeriksa::class, 'id_dokter');
+        return $this->belongsTo(Poli::class, 'poli_id');
+    }
+
+    /**
+     * Relasi ke Jadwal Periksa (banyak)
+     */
+    public function jadwalPeriksa()
+    {
+        return $this->hasMany(JadwalPeriksa::class, 'dokter_id');
+    }
+
+    /**
+     * Accessor nama lengkap dokter (opsional, untuk tampilan)
+     */
+    public function getNamaLengkapAttribute()
+    {
+        return $this->user?->name ?? $this->nama ?? '-';
     }
 }
